@@ -29,12 +29,48 @@ export default function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-6 right-6 z-50 p-3 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white shadow-lg transition-all duration-300 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
-      }`}
+      className={`fixed bottom-8 right-8 z-50 w-30 h-30 flex items-center justify-center rounded-full bg-transparent transition-all duration-300 group select-none
+        ${isVisible ? "translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"}`}
       aria-label="Scroll to top"
+      style={{ outline: "none", border: "none" }}
     >
-      <ArrowUp size={24} />
+      <span className="absolute w-30 h-30 flex items-center justify-center">
+        <svg
+          className="animate-spin-slow"
+          width="90"
+          height="90"
+          viewBox="0 0 80 80"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <path
+              id="circlePath"
+              d="M40,10
+                a30,30 0 1,1 0,60
+                a30,30 0 1,1 0,-60"
+            />
+          </defs>
+          <text fill="#bcb4d5" fontSize="9" fontFamily="sans-serif" letterSpacing="1">
+            <textPath xlinkHref="#circlePath">
+               TAHA • TAHA • TAHA • TAHA • TAHA • 
+            </textPath>
+          </text>
+        </svg>
+      </span>
+      <span className="relative flex items-center justify-center w-12 h-12">
+        <ArrowUp size={28} color="#bcb4d5" />
+      </span>
+      <style jsx global>{`
+        .animate-spin-slow {
+          animation: spin 12s linear infinite;
+        }
+        @keyframes spin {
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
     </button>
   )
 }

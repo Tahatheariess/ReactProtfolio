@@ -28,7 +28,6 @@ import PortfolioItem from "@/components/portfolio-item"
 import TestimonialCard from "@/components/testimonial-card"
 import ContactForm from "@/components/contact-form"
 import ExperienceCard from "@/components/experience-card"
-import PortfolioFilter from "@/components/portfolio-filter"
 import ScrollToTop from "@/components/scroll-to-top"
 import AnimatedCounter from "@/components/animated-counter"
 import ParticleBackground from "@/components/particle-background"
@@ -127,7 +126,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 text-gray-100 relative">
+    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 text-gray-100 relative overflow-x-hidden">
       <ParticleBackground />
 
       {/* Navigation dots */}
@@ -314,46 +313,46 @@ export default function Home() {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <div className="relative w-full h-[500px] flex items-center justify-center">
-  {/* Background rotating panels */}
-  <div className="absolute w-[360px] h-[360px] bg-gradient-to-tr from-purple-600 to-blue-500 rounded-2xl rotate-12 z-0"></div>
-  <div className="absolute w-[360px] h-[360px] bg-gradient-to-tr from-blue-500 to-cyan-500 rounded-2xl rotate-3 z-0"></div>
+                {/* Background rotating panels */}
+                <div className="absolute w-[360px] h-[360px] bg-gradient-to-tr from-purple-600 to-blue-500 rounded-2xl rotate-12 z-0"></div>
+                <div className="absolute w-[360px] h-[360px] bg-gradient-to-tr from-blue-500 to-cyan-500 rounded-2xl rotate-3 z-0"></div>
 
-  {/* Main image card */}
-  <div className="relative w-[340px] h-[340px] rounded-2xl overflow-hidden shadow-2xl z-10">
-    <img
-      src="/download.jpg"
-      alt="Taha"
-      className="w-full h-full object-cover"
-    />
-  </div>
+                {/* Main image card */}
+                <div className="relative w-[340px] h-[340px] rounded-2xl overflow-hidden shadow-2xl z-10">
+                  <img
+                    src="/download.jpg"
+                    alt="Taha"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-  {/* Floating Icons - Overlapping, Dynamic Positions */}
-  {/* React */}
-  <div className="absolute top-[12%] left-[18%] bg-gray-800 p-2.5 rounded-full shadow-xl animate-float-slow z-20">
-  <img src="/1.png" alt="JavaScript" className="w-12 h-12" />
-  </div>
+                {/* Floating Icons - Overlapping, Dynamic Positions */}
+                {/* React */}
+                <div className="absolute top-[12%] left-[18%] bg-gray-800 p-2.5 rounded-full shadow-xl animate-float-slow z-20">
+                  <img src="/1.png" alt="JavaScript" className="w-12 h-12" />
+                </div>
 
-  {/* JavaScript */}
-  <div className="absolute top-[25%] right-[10%] bg-gray-800 p-2.5 rounded-full shadow-xl animate-float-fast animation-delay-200 z-20">
-  <img src="/2.png" alt="JavaScript" className="w-12 h-12" />
-  </div>
+                {/* JavaScript */}
+                <div className="absolute top-[25%] right-[10%] bg-gray-800 p-2.5 rounded-full shadow-xl animate-float-fast animation-delay-200 z-20">
+                  <img src="/2.png" alt="JavaScript" className="w-12 h-12" />
+                </div>
 
-  {/* Node.js */}
-  <div className="absolute bottom-[20%] left-[12%] bg-gray-800 p-2.5 rounded-full shadow-xl animate-float animation-delay-400 z-20">
-  <img src="/3.png" alt="JavaScript" className="w-12 h-12" />
-  </div>
+                {/* Node.js */}
+                <div className="absolute bottom-[20%] left-[12%] bg-gray-800 p-2.5 rounded-full shadow-xl animate-float animation-delay-400 z-20">
+                  <img src="/3.png" alt="JavaScript" className="w-12 h-12" />
+                </div>
 
-  {/* HTML5 */}
-  <div className="absolute bottom-[15%] right-[14%] bg-gray-800 p-2.5 rounded-full shadow-xl animate-float animation-delay-600 z-20">
-  <img src="/4.png" alt="JavaScript" className="w-12 h-12" />
-  </div>
-</div>
+                {/* HTML5 */}
+                <div className="absolute bottom-[15%] right-[14%] bg-gray-800 p-2.5 rounded-full shadow-xl animate-float animation-delay-600 z-20">
+                  <img src="/4.png" alt="JavaScript" className="w-12 h-12" />
+                </div>
+              </div>
             </motion.div>
           </div>
 
           {/* Scroll indicator */}
           <motion.div
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+            className="absolute bottom-10 left-0 right-0 mx-auto flex flex-col items-center w-max"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
           >
@@ -701,16 +700,51 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Right Content - Skill Cloud */}
+            {/* Right Content - Floating Technology Icons Around Image */}
             <motion.div
-              className="w-full lg:w-1/2 mt-16 lg:mt-0"
+              className="w-full lg:w-1/2 flex justify-center items-center relative mt-12 lg:mt-0"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="h-[400px] relative">
-                <SkillCloud />
+              <div className="relative w-full max-w-[300px] h-[300px] sm:max-w-[320px] sm:h-[320px] md:max-w-[360px] md:h-[360px] mx-auto">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 animate-float-slow z-20">
+                  <img src="/html5.svg" alt="React" className="w-10 h-10 filter invert brightness-200" />
+                </div>
+
+                <div className="absolute top-8 right-4 animate-float animation-delay-200 z-20">
+                  <img src="/javascript.svg" alt="JavaScript" className="w-12 h-12 filter invert brightness-200" />
+                </div>
+
+                <div className="absolute top-1/2 right-0 -translate-y-1/2 animate-float-fast animation-delay-400 z-20">
+                  <img src="/tailwindcss.svg" alt="Tailwind CSS" className="w-8 h-8 filter invert brightness-200" />
+                </div>
+
+                <div className="absolute bottom-8 right-6 animate-float-slow animation-delay-600 z-20">
+                  <img src="/github.svg" alt="GitHub" className="w-10 h-10 filter invert brightness-200" />
+                </div>
+
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 animate-float animation-delay-800 z-20">
+                  <img src="/nodedotjs.svg" alt="Node.js" className="w-14 h-14 filter invert brightness-200" />
+                </div>
+
+                <div className="absolute bottom-8 left-6 animate-float-fast animation-delay-1000 z-20">
+                  <img src="/express.svg" alt="Express" className="w-9 h-9 filter invert brightness-200" />
+                </div>
+
+                <div className="absolute top-1/2 left-0 -translate-y-1/2 animate-float animation-delay-1200 z-20">
+                  <img src="/wordpress.svg" alt="WordPress" className="w-12 h-12 filter invert brightness-200" />
+                </div>
+
+                <div className="absolute top-8 left-4 animate-float-slow animation-delay-1400 z-20">
+                  <img src="/mongodb.svg" alt="MongoDB" className="w-10 h-10 filter invert brightness-200" />
+                </div>
+
+                <div className="absolute top-1/2 left-1/2 -translate-x-[55%] -translate-y-1/2 animate-float-fast animation-delay-1600 z-20">
+                  <img src="/react.svg" alt="HTML5" className="w-8 h-8 filter invert brightness-200" />
+                </div>
+
               </div>
             </motion.div>
           </div>
@@ -754,8 +788,6 @@ export default function Home() {
             <p className="text-gray-400 text-lg mb-8">
               A showcase of my best work across various industries and technologies
             </p>
-
-            <PortfolioFilter />
           </motion.div>
 
           {/* Featured Project Showcase */}
@@ -777,7 +809,7 @@ export default function Home() {
               title="Finance Dashboard"
               darkMode={true}
               animated={true}
-              technologies={["React", "TypeScript", "Tailwind"]}
+              technologies={["React", "TypeScript", "php"]}
               demoUrl="https://example.com/demo"
               githubUrl="https://github.com/example"
               featured={true}
@@ -789,7 +821,7 @@ export default function Home() {
               darkMode={true}
               animated={true}
               delay={200}
-              technologies={["React Native", "Firebase", "Redux"]}
+              technologies={["tailwind", "next.js", "express"]}
               demoUrl="https://example.com/demo"
               githubUrl="https://github.com/example"
             />
@@ -800,7 +832,7 @@ export default function Home() {
               darkMode={true}
               animated={true}
               delay={400}
-              technologies={["Next.js", "MongoDB", "Stripe"]}
+              technologies={["Next.js", "MongoDB", "node js"]}
               demoUrl="https://example.com/demo"
               githubUrl="https://github.com/example"
             />
@@ -811,31 +843,31 @@ export default function Home() {
               darkMode={true}
               animated={true}
               delay={600}
-              technologies={["Vue.js", "Node.js", "PostgreSQL"]}
+              technologies={["mongodb", "node js", "express"]}
               demoUrl="https://example.com/demo"
               githubUrl="https://github.com/example"
             />
             <PortfolioItem
-              image="/placeholder.svg?height=300&width=400"
+              image="/rideexpress.png"
               category="Web Design"
-              title="Corporate Website"
+              title="Transportation Service Website"
               darkMode={true}
               animated={true}
               delay={800}
-              technologies={["HTML/CSS", "JavaScript", "GSAP"]}
-              demoUrl="https://example.com/demo"
-              githubUrl="https://github.com/example"
+              technologies={["HTML", "CSS", "JavaScript"]}
+              demoUrl="https://www.rideexpress.com.pk"
+              githubUrl=""
             />
             <PortfolioItem
-              image="/placeholder.svg?height=300&width=400"
-              category="Mobile App"
-              title="Social Network"
+              image="/art.png"
+              category="Web Design"
+              title="Creative Agency Website"
               darkMode={true}
               animated={true}
-              delay={1000}
-              technologies={["Flutter", "Firebase", "GetX"]}
-              demoUrl="https://example.com/demo"
-              githubUrl="https://github.com/example"
+              delay={800}
+              technologies={["HTML", "CSS", "JavaScript"]}
+              demoUrl="https://"
+              githubUrl=""
             />
           </div>
 
@@ -846,14 +878,6 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Link
-              href="/portfolio"
-              className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-medium py-3 px-8 rounded-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] overflow-hidden"
-            >
-              <span className="relative z-10">View All Projects</span>
-              <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-cyan-700 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
-            </Link>
           </motion.div>
         </div>
       </section>
@@ -883,36 +907,39 @@ export default function Home() {
             <p className="text-gray-400 text-lg">Feedback from clients who have experienced working with me</p>
           </motion.div>
 
-          <Carousel className="max-w-5xl mx-auto overflow-x-hidden">
-            <CarouselContent>
-              <CarouselItem>
-                <TestimonialCard
-                  image="/placeholder.svg?height=100&width=100"
-                  name="Michael Rodriguez"
-                  position="Founder, DataFlow"
-                  quote="Working with Taha transformed our product. He not only built what we asked for but improved upon our ideas with his technical insights."
-                  darkMode={true}
-                  animated={true}
-                  rating={5}
-                />
-              </CarouselItem>
-              <CarouselItem>
-                <TestimonialCard
-                  image="/placeholder.svg?height=100&width=100"
-                  name="Sarah Johnson"
-                  position="Product Manager, EnterpriseAI"
-                  quote="Taha's ability to translate complex requirements into elegant code is remarkable. He's become an invaluable extension of our development team."
-                  darkMode={true}
-                  animated={true}
-                  rating={4.5}
-                />
-              </CarouselItem>
-            </CarouselContent>
-            <div className="flex justify-center mt-8 gap-2 sm:gap-4 w-full px-2">
-              <CarouselPrevious className="!w-9 !h-9 sm:!w-12 sm:!h-12 mx-1 sm:mx-2" />
-              <CarouselNext className="!w-9 !h-9 sm:!w-12 sm:!h-12 mx-1 sm:mx-2" />
-            </div>
-          </Carousel>
+          {/* Carousel wrapper with relative and padding for arrows */}
+          <div className="relative max-w-5xl mx-auto px-0 sm:px-12">
+            <Carousel>
+              <CarouselContent>
+                <CarouselItem>
+                  <TestimonialCard
+                    image="/placeholder.svg?height=100&width=100"
+                    name="Muhammad Basit Ali"
+                    position="CEO, Ride Rxpress"
+                    quote="Working with Taha was an incredible experience. He not only delivered exactly what we envisioned, but also enhanced our ideas with his valuable technical insights. His expertise truly transformed our product."
+                    darkMode={true}
+                    animated={true}
+                    rating={5}
+                  />
+                </CarouselItem>
+                <CarouselItem>
+                  <TestimonialCard
+                    image="/placeholder.svg?height=100&width=100"
+                    name="Sarah Johnson"
+                    position="Product Manager, EnterpriseAI"
+                    quote="Taha's ability to translate complex requirements into elegant code is remarkable. He's become an invaluable extension of our development team."
+                    darkMode={true}
+                    animated={true}
+                    rating={4.5}
+                  />
+                </CarouselItem>
+              </CarouselContent>
+              <div className="hidden sm:flex justify-center mt-8 gap-4 w-full px-0">
+                <CarouselPrevious className="!w-10 !h-10 border border-gray-500 bg-transparent text-gray-300 hover:bg-gray-700 hover:text-white transition" />
+                <CarouselNext className="!w-10 !h-10 border border-gray-500 bg-transparent text-gray-300 hover:bg-gray-700 hover:text-white transition" />
+              </div>
+            </Carousel>
+          </div>
         </div>
       </section>
 

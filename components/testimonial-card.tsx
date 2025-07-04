@@ -68,15 +68,7 @@ export default function TestimonialCard({
         </div>
       ) : (
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-16 h-16 rounded-full overflow-hidden">
-            <Image
-              src={image || "/placeholder.svg"}
-              alt={name}
-              width={100}
-              height={100}
-              className="w-full h-full object-cover"
-            />
-          </div>
+          
           <div>
             <h4 className={`font-bold text-lg ${darkMode ? "text-white" : "text-gray-800"}`}>{name}</h4>
             <p className={`${darkMode ? "text-gray-400" : "text-gray-600"} text-sm`}>{position}</p>

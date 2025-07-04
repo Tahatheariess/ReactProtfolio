@@ -28,11 +28,11 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full max-w-full overflow-x-hidden box-border ${
-        isScrolled ? "bg-gray-900/90 backdrop-blur-md shadow-lg py-3" : "bg-transparent py-5"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 box-border${
+        isScrolled ? " bg-gray-900/90 backdrop-blur-md shadow-lg py-3" : " bg-transparent py-5"
       }`}
     >
-      <div className="w-full max-w-full box-border container mx-auto px-1 sm:px-3 flex justify-between items-center overflow-x-hidden">
+      <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2 min-w-0">
           <div className="text-xl sm:text-2xl font-bold truncate">
@@ -73,8 +73,8 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-gray-800 shadow-lg absolute top-full left-0 right-0 py-6 border-t border-gray-700 w-full max-w-full overflow-x-hidden box-border">
-          <nav className="container mx-auto px-4 flex flex-col gap-6">
+        <div className="md:hidden absolute left-0 right-0 bg-gray-800 shadow-lg top-full border-t border-gray-700 w-full">
+          <nav className="container mx-auto px-4 flex flex-col gap-6 py-6 items-center text-center">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -85,7 +85,7 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
-            <Button className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white rounded-md mt-2 px-3 py-1 text-sm">
+            <Button className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white rounded-md mt-2 px-3 py-1 text-sm w-full max-w-xs mx-auto">
               Resume <Download size={16} />
             </Button>
           </nav>

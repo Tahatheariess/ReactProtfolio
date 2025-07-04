@@ -48,7 +48,7 @@ const projects = [
     description:
       "An AI-powered content generation tool that creates blog posts, social media content, and marketing copy. Integrates with OpenAI's GPT models.",
     image: "/placeholder.svg?height=500&width=800",
-    technologies: ["React", "Node.js", "OpenAI API", "Express", "PostgreSQL"],
+    technologies: ["React", "Node.js", "OpenAI API", "PostgreSQL"],
     demoUrl: "https://example.com",
     githubUrl: "https://github.com/example",
     features: [
@@ -60,6 +60,39 @@ const projects = [
     ],
   },
 ]
+
+function getTechColorClass(tech: string) {
+  switch (tech.toLowerCase()) {
+    case "react":
+      return "bg-cyan-400 text-white"; // Vibrant React blue
+    case "react native":
+      return "bg-sky-400 text-white"; // Slightly different from React
+    case "php":
+      return "bg-indigo-400 text-white"; // Bright PHP indigo
+    case "tailwind":
+      return "bg-teal-400 text-white"; // Tailwindish & bright
+    case "typescript":
+      return "bg-blue-500 text-white"; // Sharp TS blue
+    case "next.js":
+      return "bg-neutral-800 text-white"; // Next.js bold black
+    case "html":
+      return "bg-orange-600 text-white"; // Bright HTML orange
+    case "css":
+      return "bg-blue-600 text-white"; // Clean CSS blue
+    case "javascript":
+      return "bg-yellow-600 text-white"; // Bright JS yellow
+    case "node js":
+      return "bg-lime-500 text-white"; // Fresh Node green
+    case "express":
+      return "bg-brown-700 text-white"; // Express's minimal dark gray
+    case "mongodb":
+      return "bg-emerald-500 text-white"; // Bright Mongo green
+    case "sql":
+      return "bg-cyan-600 text-white"; // Brighter SQL tone
+    default:
+      return "bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white"; // fallback with gradient shine
+  }
+}
 
 export default function ProjectShowcase() {
   const [currentProject, setCurrentProject] = useState(0)
@@ -149,7 +182,7 @@ export default function ProjectShowcase() {
                 <h4 className="text-lg font-semibold mb-2">Technologies</h4>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, index) => (
-                    <Badge key={index} variant="secondary" className="bg-gray-700">
+                    <Badge key={index} className={getTechColorClass(tech)}>
                       {tech}
                     </Badge>
                   ))}
@@ -168,17 +201,28 @@ export default function ProjectShowcase() {
                     Live Demo
                   </a>
                 </Button>
-                <Button variant="outline" asChild>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
+                {project.githubUrl ? (
+                  <Button variant="outline" asChild>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <Github size={16} />
+                      View Code
+                    </a>
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    disabled
+                    className="opacity-80 cursor-not-allowed flex items-center gap-2 bg-gray-700 text-gray-300 border-gray-500"
                   >
                     <Github size={16} />
                     View Code
-                  </a>
-                </Button>
+                  </Button>
+                )}
               </div>
             </motion.div>
           </AnimatePresence>

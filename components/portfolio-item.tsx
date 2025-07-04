@@ -18,6 +18,42 @@ interface PortfolioItemProps {
   featured?: boolean
 }
 
+function getTechColorClass(tech: string) {
+  switch (tech.toLowerCase()) {
+    case "react":
+      return "bg-cyan-400 text-white"; // Vibrant React blue
+    case "react native":
+      return "bg-sky-400 text-white"; // Slightly different from React
+    case "php":
+      return "bg-indigo-400 text-white"; // Bright PHP indigo
+    case "tailwind":
+      return "bg-teal-400 text-white"; // Tailwindish & bright
+    case "typescript":
+      return "bg-blue-500 text-white"; // Sharp TS blue
+    case "next.js":
+      return "bg-neutral-800 text-white"; // Next.js bold black
+    case "html":
+      return "bg-orange-600 text-white"; // Bright HTML orange
+    case "css":
+      return "bg-blue-600 text-white"; // Clean CSS blue
+    case "javascript":
+      return "bg-yellow-600 text-white"; // Bright JS yellow
+    case "node js":
+      return "bg-lime-500 text-white"; // Fresh Node green
+    case "express":
+      return "bg-brown-700 text-white"; // Express's minimal dark gray
+    case "mongodb":
+      return "bg-emerald-500 text-white"; // Bright Mongo green
+    case "sql":
+      return "bg-cyan-600 text-white"; // Brighter SQL tone
+    default:
+      return "bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white"; // fallback with gradient shine
+  }
+}
+
+
+
+
 export default function PortfolioItem({
   image,
   category,
@@ -74,13 +110,13 @@ export default function PortfolioItem({
             </a>
           )}
 
-          <a
+          {/* <a
             href={`/portfolio/${title.toLowerCase().replace(/\s+/g, "-")}`}
             className={`w-10 h-10 ${darkMode ? "bg-cyan-600 text-white" : "bg-white text-cyan-500"} rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300`}
             aria-label="View project details"
           >
             <Eye size={18} />
-          </a>
+          </a> */}
         </div>
       </div>
 
@@ -91,12 +127,9 @@ export default function PortfolioItem({
         {technologies.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {technologies.map((tech, index) => (
-              <span
-                key={index}
-                className="text-xs bg-gray-800/80 backdrop-blur-sm text-gray-300 px-2 py-1 rounded-full"
-              >
+              <Badge key={index} className={getTechColorClass(tech)}>
                 {tech}
-              </span>
+              </Badge>
             ))}
           </div>
         )}

@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300 pt-20 pb-8 border-t border-gray-800">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 text-center items-center md:text-left md:items-start">
           {/* About Column */}
           <div>
             <h3 className="text-2xl font-bold mb-6">
@@ -16,7 +16,7 @@ export default function Footer() {
               Frontend developer specializing in building exceptional digital experiences that are fast, accessible,
               and visually appealing.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center mb-4 md:justify-start md:mb-0">
               <Link
                 href="https://github.com/tahatheariess/"
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-purple-600 transition-colors"
@@ -33,7 +33,7 @@ export default function Footer() {
           </div>
 
           {/* Links Column */}
-          <div>
+          <div className="hidden md:block">
             <h3 className="text-xl font-bold mb-6">Quick Links</h3>
             <ul className="space-y-4">
               <li>
@@ -94,7 +94,7 @@ export default function Footer() {
           {/* Contact Column */}
           <div>
             <h3 className="text-xl font-bold mb-6">Contact</h3>
-            <ul className="space-y-4">
+            <ul className="space-y-4 flex flex-col items-center md:items-start">
               <li className="flex items-start gap-3">
                 <MapPin className="text-purple-400 mt-1" size={18} />
                 <span className="text-gray-400">Karachi, Pakistan</span>

@@ -1,7 +1,9 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+// --- MODIFIED: Import useForm and ValidationError ---
+import { useForm, ValidationError } from "@formspree/react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Check, Loader2 } from "lucide-react"
@@ -12,6 +14,9 @@ interface ContactFormProps {
 }
 
 export default function ContactForm({ darkMode = false, animated = false }: ContactFormProps) {
+  // --- MODIFIED: useForm hook handles submission state ---
+  const [state, handleSubmit] = useForm("xyzjvvbd")
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,9 +24,21 @@ export default function ContactForm({ darkMode = false, animated = false }: Cont
     message: "",
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitSuccess, setSubmitSuccess] = useState(false)
+  // We still keep our own client-side validation for instant feedback
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({})
+
+  // --- MODIFIED: Reset form data on successful submission ---
+  useEffect(() => {
+    if (state.succeeded) {
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      })
+      setFormErrors({}) // Also clear any validation errors
+    }
+  }, [state.succeeded])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -39,52 +56,30 @@ export default function ContactForm({ darkMode = false, animated = false }: Cont
 
   const validateForm = () => {
     const errors: { [key: string]: string } = {}
-
-    if (!formData.name.trim()) {
-      errors.name = "Name is required"
-    }
-
+    if (!formData.name.trim()) errors.name = "Name is required"
     if (!formData.email.trim()) {
       errors.email = "Email is required"
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "Email is invalid"
     }
-
-    if (!formData.subject.trim()) {
-      errors.subject = "Subject is required"
-    }
-
-    if (!formData.message.trim()) {
-      errors.message = "Message is required"
-    }
+    if (!formData.subject.trim()) errors.subject = "Subject is required"
+    if (!formData.message.trim()) errors.message = "Message is required"
 
     setFormErrors(errors)
     return Object.keys(errors).length === 0
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = (e: React.FormEvent) => {
+    // We prevent default submission to run our validation first
     e.preventDefault()
-
-    if (!validateForm()) {
-      return
+    if (validateForm()) {
+      // If our validation passes, we call the Formspree handleSubmit
+      handleSubmit(formData)
     }
-
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    // Reset form and show success message
-    setFormData({ name: "", email: "", subject: "", message: "" })
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-
-    // Hide success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000)
   }
 
   const formContent = (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleFormSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <div className="relative">
@@ -98,9 +93,10 @@ export default function ContactForm({ darkMode = false, animated = false }: Cont
                 darkMode
                   ? "bg-gray-700 border-gray-600 text-white focus:ring-purple-500 focus:border-transparent"
                   : "border border-gray-300 focus:ring-green-500 focus:border-transparent"
-              } ${formErrors.name ? (darkMode ? "border-red-500" : "border-red-500") : ""}`}
+              } ${formErrors.name ? "border-red-500" : ""}`}
             />
             {formErrors.name && <p className="text-red-500 text-xs mt-1">{formErrors.name}</p>}
+            <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-500 text-xs mt-1" />
           </div>
         </div>
         <div>
@@ -115,9 +111,10 @@ export default function ContactForm({ darkMode = false, animated = false }: Cont
                 darkMode
                   ? "bg-gray-700 border-gray-600 text-white focus:ring-purple-500 focus:border-transparent"
                   : "border border-gray-300 focus:ring-green-500 focus:border-transparent"
-              } ${formErrors.email ? (darkMode ? "border-red-500" : "border-red-500") : ""}`}
+              } ${formErrors.email ? "border-red-500" : ""}`}
             />
             {formErrors.email && <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>}
+            <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-xs mt-1" />
           </div>
         </div>
       </div>
@@ -134,9 +131,10 @@ export default function ContactForm({ darkMode = false, animated = false }: Cont
               darkMode
                 ? "bg-gray-700 border-gray-600 text-white focus:ring-purple-500 focus:border-transparent"
                 : "border border-gray-300 focus:ring-green-500 focus:border-transparent"
-            } ${formErrors.subject ? (darkMode ? "border-red-500" : "border-red-500") : ""}`}
+            } ${formErrors.subject ? "border-red-500" : ""}`}
           />
           {formErrors.subject && <p className="text-red-500 text-xs mt-1">{formErrors.subject}</p>}
+           <ValidationError prefix="Subject" field="subject" errors={state.errors} className="text-red-500 text-xs mt-1" />
         </div>
       </div>
 
@@ -152,9 +150,10 @@ export default function ContactForm({ darkMode = false, animated = false }: Cont
               darkMode
                 ? "bg-gray-700 border-gray-600 text-white focus:ring-purple-500 focus:border-transparent"
                 : "border border-gray-300 focus:ring-green-500 focus:border-transparent"
-            } ${formErrors.message ? (darkMode ? "border-red-500" : "border-red-500") : ""}`}
+            } ${formErrors.message ? "border-red-500" : ""}`}
           ></textarea>
           {formErrors.message && <p className="text-red-500 text-xs mt-1">{formErrors.message}</p>}
+           <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-500 text-xs mt-1" />
         </div>
       </div>
 
@@ -166,27 +165,30 @@ export default function ContactForm({ darkMode = false, animated = false }: Cont
               ? "bg-gradient-to-r from-purple-600 to-cyan-600 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] text-white"
               : "bg-green-500 hover:bg-green-600 text-white"
           }`}
-          disabled={isSubmitting}
+          // --- MODIFIED: Use state.submitting ---
+          disabled={state.submitting}
         >
           <span className="relative z-10">
-            {isSubmitting ? "Sending..." : submitSuccess ? "Message Sent" : "Send Message"}
+            {state.submitting ? "Sending..." : state.succeeded ? "Message Sent" : "Send Message"}
           </span>
-          {isSubmitting ? (
+          {state.submitting ? (
             <Loader2 size={18} className="relative z-10 animate-spin" />
-          ) : submitSuccess ? (
+          ) : state.succeeded ? (
             <Check size={18} className="relative z-10" />
           ) : (
             <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
           )}
-          <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-cyan-700 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+          {darkMode && <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-cyan-700 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>}
         </Button>
 
-        {submitSuccess && (
+        {/* --- MODIFIED: Show success message based on state.succeeded --- */}
+        {state.succeeded && (
           <div className="flex items-center gap-2 mt-4 text-purple-400 bg-purple-500/10 p-3 rounded-lg border border-purple-500/20">
             <Check size={18} />
             <p>Your message has been sent successfully! I'll get back to you soon.</p>
           </div>
         )}
+        <ValidationError errors={state.errors} className="mt-4 text-red-500" />
       </div>
     </form>
   )

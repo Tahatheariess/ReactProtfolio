@@ -21,6 +21,32 @@ interface ExperienceCardProps {
   technologies?: string[]
 }
 
+function getTechColorClass(tech: string) {
+  switch (tech.toLowerCase()) {
+    case "react":
+      return "bg-purple-600 text-white";
+    case "typescript":
+      return "bg-cyan-600 text-white";
+    case "next.js":
+      return "bg-pink-600 text-white";
+    case "html":
+      return "bg-orange-500 text-white";
+    case "css":
+      return "bg-blue-500 text-white";
+    case "javascript":
+      return "bg-yellow-400 text-black";
+    case "node js":
+    case "node.js":
+      return "bg-green-600 text-white";
+    case "express":
+      return "bg-gray-900 text-white";
+    case "mongodb":
+      return "bg-green-700 text-white";
+    default:
+      return "bg-gray-700 text-white";
+  }
+}
+
 export default function ExperienceCard({
   years,
   logoType,
@@ -64,7 +90,7 @@ export default function ExperienceCard({
         {technologies.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-3">
             {technologies.map((tech, index) => (
-              <Badge key={index} variant="outline" className="bg-gray-700/50">
+              <Badge key={index} className={getTechColorClass(tech)}>
                 {tech}
               </Badge>
             ))}
