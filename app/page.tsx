@@ -139,11 +139,10 @@ export default function Home() {
                   <TooltipTrigger asChild>
                     <a
                       href={`#${section}`}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        activeSection === section
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === section
                           ? "bg-gradient-to-r from-purple-500 to-cyan-500 scale-150"
                           : "bg-gray-600 hover:bg-gray-400"
-                      }`}
+                        }`}
                       aria-label={`Navigate to ${section} section`}
                     />
                   </TooltipTrigger>
@@ -318,13 +317,14 @@ export default function Home() {
                 <div className="absolute w-[360px] h-[360px] bg-gradient-to-tr from-blue-500 to-cyan-500 rounded-2xl rotate-3 z-0"></div>
 
                 {/* Main image card */}
-                <div className="relative w-[340px] h-[340px] rounded-2xl overflow-hidden shadow-2xl z-10">
+                <div className="relative w-[340px] h-[340px] rounded-2xl overflow-hidden shadow-2xl z-10 bg-[#8CCDEB]">
                   <img
-                    src="/download.jpg"
+                    src="/gptlogo-2.png"
                     alt="Taha"
                     className="w-full h-full object-cover"
                   />
                 </div>
+
 
                 {/* Floating Icons - Overlapping, Dynamic Positions */}
                 {/* React */}
@@ -440,7 +440,7 @@ export default function Home() {
               <h2 className="text-4xl font-bold mb-6">Crafting Digital Experiences</h2>
 
               <p className="text-gray-400 mb-8 text-lg">
-              I'm Taha, a Frontend developer with over 1 years of experience in crafting websites. With expertise in React, Javascript, and Node.js, I focus on building scalable solutions that address real-world business challenges
+                I'm Taha, a Frontend developer with over 1 years of experience in crafting websites. With expertise in React, Javascript, and Node.js, I focus on building scalable solutions that address real-world business challenges
               </p>
 
               <Tabs defaultValue="skills" className="mb-8">
@@ -497,7 +497,7 @@ export default function Home() {
                     transition={{ duration: 0.5 }}
                   >
                     <p className="text-gray-300">
-                    When I'm not coding, I enjoy playing football and diving into the wonders of astronomy. I'm also passionate about exploring new technologies and contributing to tech-related projects in my free time.
+                      When I'm not coding, I enjoy playing football and diving into the wonders of astronomy. I'm also passionate about exploring new technologies and contributing to tech-related projects in my free time.
                     </p>
                   </motion.div>
                 </TabsContent>
@@ -1005,7 +1005,7 @@ export default function Home() {
                       <h4 className="font-bold mb-1">Email</h4>
                       <p className="text-gray-400">
                         <a href="mailto:" className="hover:text-purple-400 transition-colors">
-                        tahatheariess@gmail.com
+                          tahatheariess@gmail.com
                         </a>
                       </p>
                     </div>
@@ -1019,7 +1019,7 @@ export default function Home() {
                       <h4 className="font-bold mb-1">Phone</h4>
                       <p className="text-gray-400">
                         <a href="tel:+15551234567" className="hover:text-purple-400 transition-colors">
-                        +92 334 2266991
+                          +92 334 2266991
                         </a>
                       </p>
                     </div>
